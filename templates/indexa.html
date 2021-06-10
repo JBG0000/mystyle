@@ -1,0 +1,308 @@
+<!DOCTYPE html> <!--이 index를 불러와좠자 이미지 다 깨지고 의미가 없다! app파일로 서버 만들어야 제대로 동작함-->
+
+<!--이제 클라이언트 코딩 시작-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:title" content="정말 놀라운 옷입히기"/>
+    <meta property="og:description" content="놀랍게도...! 정말 이게 다에요..!"/>
+    <meta property="og:image" content="{{ url_for('static', filename='ogimage.png') }}"/>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>My Style UP!</title> <!--브라우저 이름-->
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"
+    />  <!-- Bulma 참조시 필요한 link -->
+
+
+    <style>
+
+        @import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css);
+        @import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
+
+        .color {
+            background-color: aquamarine;
+        }
+
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: #353535;
+            color: #FFF;
+        }
+
+        .jumbotron h1 {
+            color: #353535;
+        }
+
+        footer {
+            margin-bottom: 0 !important;
+            margin-top: 80px;
+        }
+
+        footer p {
+            margin: 0;
+            padding: 0;
+        }
+
+        span.icon {
+            margin: 0 5px;
+            color: #D64541;
+        }
+
+        h2 {
+            color: #BDC3C7;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .mrng-60-top {
+            margin-top: 60px;
+        }
+
+        /* Global Button Styles */
+        a.animated-button:link, a.animated-button:visited {
+            position: relative;
+            display: block;
+            margin: 30px auto 0;
+            padding: 14px 15px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            text-transform: uppercase;
+            overflow: hidden;
+            letter-spacing: .08em;
+            border-radius: 0;
+            text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
+            -webkit-transition: all 1s ease;
+            -moz-transition: all 1s ease;
+            -o-transition: all 1s ease;
+            transition: all 1s ease;
+        }
+
+        a.animated-button:link:after, a.animated-button:visited:after {
+            content: "";
+            position: absolute;
+            height: 0%;
+            left: 50%;
+            top: 50%;
+            width: 150%;
+            z-index: -1;
+            -webkit-transition: all 0.75s ease 0s;
+            -moz-transition: all 0.75s ease 0s;
+            -o-transition: all 0.75s ease 0s;
+            transition: all 0.75s ease 0s;
+        }
+
+        a.animated-button:link:hover, a.animated-button:visited:hover {
+            color: #FFF;
+            text-shadow: none;
+        }
+
+        a.animated-button:link:hover:after, a.animated-button:visited:hover:after {
+            height: 450%;
+        }
+
+        a.animated-button:link, a.animated-button:visited {
+            position: relative;
+            display: block;
+            margin: 30px auto 0;
+            padding: 14px 15px;
+            color: #fff;
+            font-size: 14px;
+            border-radius: 0;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            text-transform: uppercase;
+            overflow: hidden;
+            letter-spacing: .08em;
+            text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
+            -webkit-transition: all 1s ease;
+            -moz-transition: all 1s ease;
+            -o-transition: all 1s ease;
+            transition: all 1s ease;
+        }
+
+        a.animated-button.gibson-one {
+            border: 2px solid #65b37a;
+            color: #FFF;
+        }
+
+        a.animated-button.gibson-one:after {
+            opacity: 0;
+            background-image: -webkit-linear-gradient(transparent 50%, rgba(101, 179, 122, 0.2) 50%);
+            background-image: -moz-linear-gradient(transparent 50%, rgba(101, 179, 122, 0.2) 50%);
+            background-size: 10px 10px;
+            -moz-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+            -ms-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+            -webkit-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+            transform: translateX(-50%) translateY(-50%) rotate(25deg);
+        }
+
+        a.animated-button.gibson-one:hover:after {
+            height: 600% !important;
+            opacity: 1;
+            color: #FFF;
+        }
+
+        a.animated-button.gibson-two {
+            border: 2px solid #65b37a;
+            color: #FFF;
+        }
+
+        a.animated-button.gibson-two:after {
+            opacity: 0;
+            background-image: -webkit-linear-gradient(transparent 50%, rgba(101, 179, 122, 0.2) 50%);
+            background-image: -moz-linear-gradient(transparent 50%, rgba(101, 179, 122, 0.2) 50%);
+            background-size: 10px 10px;
+            -moz-transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+            -ms-transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+            -webkit-transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+            transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+        }
+
+        a.animated-button.gibson-two:hover:after {
+            height: 600% !important;
+            opacity: 1;
+            color: #FFF;
+        }
+
+        a.animated-button.gibson-three {
+            border: 2px solid #65b37a;
+            color: #FFF;
+        }
+
+        a.animated-button.gibson-three:after {
+            opacity: 0;
+            background-image: -webkit-linear-gradient(transparent 50%, rgba(101, 179, 122, 0.2) 50%);
+            background-image: -moz-linear-gradient(transparent 50%, rgba(101, 179, 122, 0.2) 50%);
+            background-size: 10px 10px;
+            -moz-transform: translateX(-50%) translateY(-50%) rotate(90deg);
+            -ms-transform: translateX(-50%) translateY(-50%) rotate(90deg);
+            -webkit-transform: translateX(-50%) translateY(-50%) rotate(90deg);
+            transform: translateX(-50%) translateY(-50%) rotate(90deg);
+        }
+
+        a.animated-button.gibson-three:hover:after {
+            height: 600% !important;
+            opacity: 1;
+            color: #FFF;
+        }
+
+        a.animated-button.gibson-four {
+            border: 2px solid #65b37a;
+            color: #FFF;
+        }
+
+        a.animated-button.gibson-four:after {
+            opacity: 0;
+            background-image: -webkit-linear-gradient(transparent 50%, rgba(101, 179, 122, 0.2) 50%);
+            background-image: -moz-linear-gradient(transparent 50%, rgba(101, 179, 122, 0.2) 50%);
+            background-size: 10px 10px;
+            -moz-transform: translateX(-50%) translateY(-50%);
+            -ms-transform: translateX(-50%) translateY(-50%);
+            -webkit-transform: translateX(-50%) translateY(-50%);
+            transform: translateX(-50%) translateY(-50%);
+        }
+
+        a.animated-button.gibson-four:hover:after {
+            height: 600% !important;
+            opacity: 1;
+            color: #FFF;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+<section class="hero color is-fullheight">
+    <!-- Hero head: will stick at the top -->
+    <div class="hero-head">
+        <header class="navbar">
+            <div class="container">
+                <div class="navbar-brand">
+                    <a class="navbar-item">
+                        <img src="https://bulma.io/images/bulma-type-white.png" alt="Logo">
+                    </a>
+                    <span class="navbar-burger burger" data-target="navbarMenuHeroC">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+                </div>
+                <div id="navbarMenuHeroC" class="navbar-menu">
+                    <div class="navbar-end">
+                        <a class="navbar-item is-active">
+                            Home
+                        </a>
+                        <a class="navbar-item">
+                            Examples
+                        </a>
+                        <a class="navbar-item">
+                            Documentation
+                        </a>
+                        <span class="navbar-item">
+              <a class="button is-success is-inverted">
+<!--                <span class="icon">-->
+                  <!--                  <i class="fab fa-github"></i>-->
+                  <!--                </span>      원래는 깃헙 아이콘있는 다운로드인데 우리는 그런 기능 필요없으니까,,, 그리고 -->
+                <span>Download</span>
+              </a>
+            </span>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <!-- Hero content: will be in the middle -->
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <h1 class="title">
+                Title
+            </h1>
+            <h2 class="subtitle">
+                Subtitle
+            </h2>
+        </div>
+    </div>
+
+    <!-- Hero footer: will stick at the bottom -->
+    <div class="hero-foot">
+        <nav class="tabs is-boxed is-fullwidth">
+            <div class="container">
+                <ul>
+                    <li class="is-active"><a>Overview</a></li>
+                    <li><a>Modifiers</a></li>
+                    <li><a>Grid</a></li>
+                    <li><a>Elements</a></li>
+                    <li><a>Components</a></li>
+                    <li><a>Layout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</section>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 col-sm-3 col-xs-6"><a href="#" class="btn btn-sm animated-button gibson-one">Sign up</a>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6"><a href="#" class="btn btn-sm animated-button gibson-two">Login</a>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6"><a href="#" class="btn btn-sm animated-button gibson-three">Register</a>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6"><a href="#" class="btn btn-sm animated-button gibson-four">Learn
+            more</a></div>
+    </div>
+
+</body>
+</html>

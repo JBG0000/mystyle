@@ -1,0 +1,413 @@
+<!DOCTYPE html> <!--이 index를 불러와좠자 이미지 다 깨지고 의미가 없다! app파일로 서버 만들어야 제대로 동작함-->
+
+<!--이제 클라이언트 코딩 시작-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <meta property="og:title" content="정말 놀라운 옷입히기"/>
+    <meta property="og:description" content="놀랍게도...! 정말 이게 다에요..!"/>
+    <meta property="og:image" content="{{ url_for('static', filename='ogimage.png') }}"/>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <title>My Style UP!</title> <!--브라우저 이름-->
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"
+    />  <!-- Bulma 참조시 필요한 link -->
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
+    <style>
+        /*임포트는 제일 위에 있어야 먹는다*/
+        @import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css);
+        @import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
+
+        .background {
+            /*width: 1200px;*/
+            background-color: snow;
+            margin: auto;
+            position: relative;
+        }
+
+        .position {
+            margin-top: 600px;
+            padding-bottom: 100px;
+            position: relative;
+        }
+
+        .buttoncolor {
+            background-color: snow;
+            border: 0;
+            /*outline: 0;*/
+            font-size: 20px;
+            color: #65b37a;
+            font-weight: bold;
+            padding-bottom: 50px;
+            margin-top: 30px;
+        }
+
+        .right {
+            float: right;
+            padding-top: 30px;
+        }
+
+        .body {
+            /*color: white;*/
+            /*width: 800px;*/
+            /*height: 1000px;*/
+            /*border-radius: 10px;*/
+            /*text-align: center;*/
+            /*padding-top: 40px;*/
+
+            /*padding:200px 200px 200px 200px;*/
+            /*background-color: white;*/
+            width: 500px; /*이미지 width랑 동일하게*/
+            display: block; /*이미지를 block 요소로 바꿔야 마진이 먹음! 패딩은 안에 넓이 조절이라 일일이 값 바꿔줘야 하더라ㅠㅠ*/
+            margin: auto;
+            position: relative; /*포지션 릴레이티브 먼저 div로 지정해주고 그 안에 이미지에다가 앱솔루트 포지션 먹여야 이미지 겹쳐짐!*/
+        }
+
+        .font {
+            font-size: 30px;
+            font-weight: bold;
+            color: #65b37a;
+            padding-top: 30px;
+            padding-left: 30px;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+
+        /*버튼*/
+
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: #353535;
+            color: #FFF;
+        }
+
+        .jumbotron h1 {
+            color: #353535;
+        }
+
+        footer {
+            margin-bottom: 0 !important;
+            margin-top: 80px;
+        }
+
+        footer p {
+            margin: 0;
+            padding: 0;
+        }
+
+        span.icon {
+            margin: 0 5px;
+            color: #D64541;
+        }
+
+        h2 {
+            color: #BDC3C7;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .mrng-60-top {
+            margin-top: 60px;
+        }
+
+        /* Global Button Styles */
+        a.animated-button:link, a.animated-button:visited {
+            position: relative;
+            display: block;
+            margin: 30px auto 0;
+            padding: 14px 15px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            text-transform: uppercase;
+            overflow: hidden;
+            letter-spacing: .08em;
+            border-radius: 0;
+            text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
+            -webkit-transition: all 1s ease;
+            -moz-transition: all 1s ease;
+            -o-transition: all 1s ease;
+            transition: all 1s ease;
+        }
+
+        a.animated-button:link:after, a.animated-button:visited:after {
+            content: "";
+            position: absolute;
+            height: 0%;
+            left: 50%;
+            top: 50%;
+            width: 150%;
+            z-index: -1;
+            -webkit-transition: all 0.75s ease 0s;
+            -moz-transition: all 0.75s ease 0s;
+            -o-transition: all 0.75s ease 0s;
+            transition: all 0.75s ease 0s;
+        }
+
+        a.animated-button:link:hover, a.animated-button:visited:hover {
+            color: #FFF;
+            text-shadow: none;
+        }
+
+        a.animated-button:link:hover:after, a.animated-button:visited:hover:after {
+            height: 450%;
+        }
+
+        a.animated-button:link, a.animated-button:visited {
+            position: relative;
+            display: block;
+            margin: 30px auto 0;
+            padding: 14px 15px;
+            color: #fff;
+            font-size: 14px;
+            border-radius: 0;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            text-transform: uppercase;
+            overflow: hidden;
+            letter-spacing: .08em;
+            text-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 1px 0 rgba(0, 0, 0, 0.2);
+            -webkit-transition: all 1s ease;
+            -moz-transition: all 1s ease;
+            -o-transition: all 1s ease;
+            transition: all 1s ease;
+        }
+
+        a.animated-button.gibson-one {
+            border: 2px solid #65b37a;
+            color: #FFF;
+        }
+
+        a.animated-button.gibson-one:after {
+            opacity: 0;
+            background-image: -webkit-linear-gradient(transparent 50%, rgba(101, 179, 122, 0.2) 50%);
+            background-image: -moz-linear-gradient(transparent 50%, rgba(101, 179, 122, 0.2) 50%);
+            background-size: 10px 10px;
+            -moz-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+            -ms-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+            -webkit-transform: translateX(-50%) translateY(-50%) rotate(25deg);
+            transform: translateX(-50%) translateY(-50%) rotate(25deg);
+        }
+
+        a.animated-button.gibson-one:hover:after {
+            height: 600% !important;
+            opacity: 1;
+            color: #FFF;
+        }
+
+        a.animated-button.gibson-two {
+            border: 2px solid #65b37a;
+            color: #FFF;
+        }
+
+        a.animated-button.gibson-two:after {
+            opacity: 0;
+            background-image: -webkit-linear-gradient(transparent 50%, rgba(101, 179, 122, 0.2) 50%);
+            background-image: -moz-linear-gradient(transparent 50%, rgba(101, 179, 122, 0.2) 50%);
+            background-size: 10px 10px;
+            -moz-transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+            -ms-transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+            -webkit-transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+            transform: translateX(-50%) translateY(-50%) rotate(-25deg);
+        }
+
+        a.animated-button.gibson-two:hover:after {
+            height: 600% !important;
+            opacity: 1;
+            color: #FFF;
+        }
+
+        a.animated-button.gibson-three {
+            border: 2px solid #65b37a;
+            color: #FFF;
+        }
+
+        a.animated-button.gibson-three:after {
+            opacity: 0;
+            background-image: -webkit-linear-gradient(transparent 50%, rgba(101, 179, 122, 0.2) 50%);
+            background-image: -moz-linear-gradient(transparent 50%, rgba(101, 179, 122, 0.2) 50%);
+            background-size: 10px 10px;
+            -moz-transform: translateX(-50%) translateY(-50%) rotate(90deg);
+            -ms-transform: translateX(-50%) translateY(-50%) rotate(90deg);
+            -webkit-transform: translateX(-50%) translateY(-50%) rotate(90deg);
+            transform: translateX(-50%) translateY(-50%) rotate(90deg);
+        }
+
+        a.animated-button.gibson-three:hover:after {
+            height: 600% !important;
+            opacity: 1;
+            color: #FFF;
+        }
+
+        a.animated-button.gibson-four {
+            border: 2px solid #65b37a;
+            color: #FFF;
+        }
+
+        a.animated-button.gibson-four:after {
+            opacity: 0;
+            background-image: -webkit-linear-gradient(transparent 50%, rgba(101, 179, 122, 0.2) 50%);
+            background-image: -moz-linear-gradient(transparent 50%, rgba(101, 179, 122, 0.2) 50%);
+            background-size: 10px 10px;
+            -moz-transform: translateX(-50%) translateY(-50%);
+            -ms-transform: translateX(-50%) translateY(-50%);
+            -webkit-transform: translateX(-50%) translateY(-50%);
+            transform: translateX(-50%) translateY(-50%);
+        }
+
+        a.animated-button.gibson-four:hover:after {
+            height: 600% !important;
+            opacity: 1;
+            color: #FFF;
+        }
+
+        .display {
+            display: none;
+        }
+
+    </style>
+    <script>
+        $(document).ready(function () {
+            listing();
+        });
+
+
+        // $(document).ready(function () {
+        //     $(document).on("click", ".heir", function () {
+        //         $(".display").fadeToggle('fast');
+        //     });
+        // });
+
+        function listing() {
+            console.log('화면 로딩 후 잘 실행되었습니다');
+        }
+
+        //
+        function click() {   //포스팅박스 열고 닫는거 버튼눌러서 작동시키는 함수
+            // let log = document.getElementById('log');
+            // console.log('클릭이 되었습니다');
+            // var img = new Array();
+            // img[0] = document.getElementsByTagName('img')[1];   //<img></img>들중에 두번쨰로 위에있는거 선택(0,1,2)해서 id값 읽어옴!//
+            // img[1] = document.getElementsByTagName('img')[2];
+            // img[2] = document.getElementsByTagName('img')[3];
+            // img[3] = document.getElementsByTagName('img')[4];
+
+            // console.log(img);   //위에 만든 배열 읽기//
+            //---------------------------------위에건 쓰다만거,,,--------------------------------/
+            let display_status = $('#heir').css('display');
+            console.log(display_status);
+
+            if (display_status == 'block') {    //디스플레이 상태가 none이면 보이게, 보이면 none으로//
+                $('#heir').hide();
+            } else if (display_status == 'none') {
+                $('#heir').show();
+            }
+            return false;
+        }
+
+        function click1() {
+            let display_status = $('#shirt').css('display');
+            console.log(display_status);
+
+            if (display_status == 'block') {    //디스플레이 상태가 none이면 보이게, 보이면 none으로//
+                $('#shirt').hide();
+            } else if (display_status == 'none') {
+                $('#shirt').show();
+            }
+            return false;
+        }
+
+        function click2() {
+            let display_status = $('#pant').css('display');
+            console.log(display_status);
+
+            if (display_status == 'block') {    //디스플레이 상태가 none이면 보이게, 보이면 none으로//
+                $('#pant').hide();
+            } else if (display_status == 'none') {
+                $('#pant').show();
+            }
+            return false;
+        }
+
+        function click3() {
+            let display_status = $('#outer').css('display');
+            console.log(display_status);
+
+            if (display_status == 'block') {    //디스플레이 상태가 none이면 보이게, 보이면 none으로//
+                $('#outer').hide();
+            } else if (display_status == 'none') {
+                $('#outer').show();
+            }
+            return false;
+        }
+
+
+    </script>
+</head>
+<body>
+<div class="background">
+    <button class="font buttoncolor">My Style UP!</button>
+    <button class="buttoncolor right">My Design</button>
+    <button class="buttoncolor right">Help</button>
+
+    <div>
+        <p class="center">손 가는대로 마음대로 꾸며보세요!</p>
+    </div>
+    <div class="background">
+        <div class="body">  <!--이미지-->
+            <img src="{{ url_for('static', filename='동글몸통.png') }}" width="500" height="600"
+                 style="position:absolute; z-index:2; display: block"/> <!--z축 순서대로(1,2,3) 배경에 깔림! 이걸로 겹치는 순서 지정 가능-->
+            <!--satic 폴더 안에있는 사진 주소 불러옴-->
+            <img src="{{ url_for('static', filename='기본머리.png') }}" width="500" height="600"
+                 class="display" style="position:absolute;  z-index:5; " id="heir"/>
+            <img src="{{ url_for('static', filename='니트상의.png') }}" width="500" height="600"
+                 class="display" style="position:absolute;  z-index:4;" id="shirt"/>
+            <img src="{{ url_for('static', filename='청바지.png') }}" width="500" height="600"
+                 class="display" style="position:absolute;  z-index:3;" id="pant"/>
+            <img src="{{ url_for('static', filename='롱패딩.png') }}" width="500" height="600"
+                 class="display" style="position:absolute;  z-index:6;" id="outer"/>
+
+        </div>
+    </div>
+</div>
+<div class="container position" style="z-index:2;"> <!--z-index 사용시 css 커서올리는 효과나 버튼 등등은 z-index중 제일 높은 값을 해줘야 인식됨!-->
+    <div class="row">
+        <div class="col-md-3 col-sm-3 col-xs-6"><a href="javascript:click();"
+                                                   class="btn btn-sm animated-button gibson-one">머리</a>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6"><a href="javascript:click1();"
+                                                   class="btn btn-sm animated-button gibson-two">상의</a>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6"><a href="javascript:click2();"
+                                                   class="btn btn-sm animated-button gibson-three">하의</a>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6"><a href="javascript:click3();"
+                                                   class="btn btn-sm animated-button gibson-four">외투</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
